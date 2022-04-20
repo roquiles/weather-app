@@ -12,3 +12,4 @@ A weather application to get the temperature, weather condition and whether it i
 ## Bonus features
 
 - [ ] By closing the browser window the city name will be stored in localStorage and when the user returns, the name will be retrieved to make an api call to update the `DOM`.
+- [ ] User can see the weather forecast for the next four days.
