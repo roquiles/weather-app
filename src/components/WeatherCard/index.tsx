@@ -1,12 +1,12 @@
-import { MainContainer } from "../MainContainer";
-import { SecondaryContainer } from "../SecondaryContainer";
+import { LeftContainer } from "../LeftContainer";
+import { RightContainer } from "../RightContainer";
+import { Container } from "./styles";
 
 export function WeatherCard() {
   return (
-    <div>
-      <h1>Weather Forecast</h1>
-      <MainContainer />
-      <SecondaryContainer />
-    </div>
+    <Container>
+      <LeftContainer />
+      <RightContainer />
+    </Container>
   );
 }

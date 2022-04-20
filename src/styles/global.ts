@@ -1,6 +1,15 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
+    :root{
+        --text-color: #F6F4F3;
+        --blue-200: #b4c2d0;
+        --blue-600: #354E6E;
+        --blue-800: #293241;
+        --blue-900: #1F2532;
+        --gradient: linear-gradient( 135deg, #2c8c99 10%, #28464b 100%);
+    }
+
     * {
         margin: 0;
         padding: 0;
@@ -17,12 +26,17 @@ export const GlobalStyle = createGlobalStyle`
         }
     }
 
+    body {
+        background: var(--blue-600);
+    }
+
     body, input, button {
         font-family: 'Open-Sans', sans-serif;
         font-weight: 400;
+        color: var(--text-color);
     }
-
-    h1, h2, h3, h4, h5, h6, strong {
+    
+    h2, h3, h4, h5, h6, strong {
         font-weight: 600;
     }
 
