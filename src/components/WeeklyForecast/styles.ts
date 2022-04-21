@@ -20,7 +20,7 @@ export const DailyForecastCard = styled.div`
   align-items: center;
   justify-content: center;
 
-  transition: all 0.4s;
+  transition: all 0.2s;
 
   &:hover {
     border-radius: 1rem;
