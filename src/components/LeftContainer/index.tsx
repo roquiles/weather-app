@@ -3,10 +3,39 @@ import { MdOutlineLocationOn } from "react-icons/md";
 import { Container } from "./styles";
 
 export function LeftContainer() {
+  const daysOfTheWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  const monthsOfTheYear = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const date = new Date();
+
   return (
     <Container>
-      <h2>Tuesday</h2>
-      <p id="date">19 Abr 2022</p>
+      <h2>{daysOfTheWeek[date.getDay()]}</h2>
+      <p id="date">{`${date.getDate()} ${
+        monthsOfTheYear[date.getMonth()]
+      } ${date.getFullYear()}`}</p>
 
       <div id="location">
         <MdOutlineLocationOn size={20} />
