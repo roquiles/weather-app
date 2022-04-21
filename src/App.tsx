@@ -1,13 +1,14 @@
 import { Header } from "./components/Header";
 import { WeatherCard } from "./components/WeatherCard";
+import { ForecastProvider } from "./ForecastContext";
 import { GlobalStyle } from "./styles/global";
 
 export function App() {
   return (
-    <div className="App">
+    <ForecastProvider>
       <GlobalStyle />
       <Header />
       <WeatherCard />
-    </div>
+    </ForecastProvider>
   );
 }
