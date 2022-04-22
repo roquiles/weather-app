@@ -1,6 +1,6 @@
 import { Header } from "./components/Header";
 import { WeatherCard } from "./components/WeatherCard";
-import { ForecastProvider } from "./ForecastContext";
+import { ForecastProvider } from "./hooks/ForecastContext";
 import { GlobalStyle } from "./styles/global";
 
 export function App() {
