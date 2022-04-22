@@ -1,8 +1,11 @@
 import { WiHail } from "react-icons/wi";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { Container } from "./styles";
+import { useForecast } from "../../hooks/ForecastContext";
 
 export function LeftContainer() {
+  const forecast = useForecast();
+
   const daysOfTheWeek = [
     "Sunday",
     "Monday",
@@ -39,11 +42,11 @@ export function LeftContainer() {
 
       <div id="location">
         <MdOutlineLocationOn size={20} />
-        Porto Alegre, BR
+        {`${forecast.name}, ${forecast.sys?.country}`}
       </div>
 
       <WiHail size={100} />
-      <p id="temperature">29°C</p>
+      <p id="temperature">{Math.round(forecast.main.temp)}ºC</p>
       <p id="weather-label">Sunny</p>
     </Container>
   );
