@@ -17,6 +17,12 @@ interface ForecastContextData {
     temp_min: number;
     temp_max: number;
   };
+  weather: [
+    {
+      main: string;
+      description: string;
+    }
+  ];
 }
 
 interface ForecastProviderProps {
@@ -28,15 +34,21 @@ const ForecastContext = createContext<ForecastContextData>(
 );
 
 export function ForecastProvider(props: ForecastProviderProps) {
-  const [city, setCity] = useState("Vienna");
+  const [city, setCity] = useState("Porto Alegre");
   const [forecast, setForecast] = useState({
     name: "",
     sys: { country: "" },
     main: {
-      temp: 273,
+      temp: 0,
       temp_min: 0,
       temp_max: 0,
     },
+    weather: [
+      {
+        main: "",
+        description: "",
+      },
+    ],
   } as ForecastContextData);
 
   useEffect(() => {
