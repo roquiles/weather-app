@@ -14,6 +14,10 @@ export const Container = styled.section`
     margin-bottom: 0.25rem;
   }
 
+  img {
+    width: 150px;
+  }
+
   transition: all 0.5s;
 
   &:hover {
@@ -28,12 +32,12 @@ export const Container = styled.section`
     display: flex;
     height: 1rem;
     margin-top: 2rem;
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
     font-weight: 100;
   }
 
   #temperature {
-    font-size: 4.5rem;
+    font-size: 4rem;
     margin-bottom: 1.5rem;
     font-weight: 600;
   }
