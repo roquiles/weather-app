@@ -1,6 +1,6 @@
-import { WiHail } from "react-icons/wi";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { Container } from "./styles";
+import Cloudy from "../../assets/WeatherIcons/cloudy-day.svg";
 import { useForecast } from "../../hooks/ForecastContext";
 
 export function LeftContainer() {
@@ -45,9 +45,12 @@ export function LeftContainer() {
         {`${forecast.name}, ${forecast.sys?.country}`}
       </div>
 
-      <WiHail size={100} />
+      <img src={Cloudy} alt="Cloudy" />
       <p id="temperature">{Math.round(forecast.main.temp)}ºC</p>
-      <p id="weather-label">Sunny</p>
+      <p id="weather-label">
+        {forecast.weather[0]["description"][0]?.toUpperCase() +
+          forecast.weather[0]["description"]?.substring(1)}
+      </p>
     </Container>
   );
 }
