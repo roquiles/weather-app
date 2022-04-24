@@ -31,7 +31,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body, input, button {
-        font-family: 'Open-Sans', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-weight: 400;
         color: var(--text-color);
     }
