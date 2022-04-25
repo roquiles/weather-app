@@ -5,3 +5,7 @@ export function getLocalTime(date: Date, timezone: number) {
     ? date.getHours() + localTimezone - 2
     : date.getHours() + localTimezone;
 }
+
+export function toKmH(speed: number) {
+  return (speed * 3.6).toFixed(2);
+}
