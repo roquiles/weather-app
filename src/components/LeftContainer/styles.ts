@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import img from "../../assets/Images/rainy.png";
 
 export const Container = styled.section`
-  width: 50%;
+  width: 45%;
   padding: 2rem;
-  height: 500px;
-  background: url(${img});
+  height: 100%;
+  background: linear-gradient(#8d80ad, #4d7298);
   border-radius: 2rem;
   box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
 
@@ -37,13 +36,13 @@ export const Container = styled.section`
   }
 
   #temperature {
+    margin-top: 5rem;
     font-size: 4rem;
-    margin-bottom: 1.5rem;
     font-weight: 600;
   }
 
   #weather-label {
-    font-weight: 600;
+    font-weight: 100;
     font-size: 1.5rem;
   }
 `;

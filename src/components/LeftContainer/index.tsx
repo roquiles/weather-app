@@ -1,37 +1,38 @@
-import { MdOutlineLocationOn } from "react-icons/md";
+import { useForecast } from "../../hooks/useForecast";
 import { Container } from "./styles";
-import Cloudy from "../../assets/WeatherIcons/cloudy-day.svg";
-import { useForecast } from "../../hooks/ForecastContext";
+import { MdOutlineLocationOn } from "react-icons/md";
+import { useEffect, useState } from "react";
+
+import { getLocalTime } from "../../utils/helpers";
+import {
+  daysOfTheWeek,
+  iconMapper,
+  monthsOfTheYear,
+} from "../../utils/constants";
 
 export function LeftContainer() {
-  const forecast = useForecast();
+  const [dayOrNight, setDayOrNight] = useState("");
+  const [weatherIcon, setWeatherIcon] = useState("");
 
-  const daysOfTheWeek = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
+  const { forecast, city } = useForecast();
+  const weatherLabel =
+    forecast.current.weather[0]["description"][0]?.toUpperCase() +
+    forecast.current.weather[0]["description"]?.substring(1);
 
-  const monthsOfTheYear = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
+  // Discovering local time to determine wether it is day or night
   const date = new Date();
+  const localTime = getLocalTime(date, forecast.timezone_offset);
+
+  // Determining ir it's day or night
+  useEffect(() => {
+    if (localTime >= 6 && localTime <= 17) {
+      setDayOrNight("day");
+    } else {
+      setDayOrNight("night");
+    }
+
+    setWeatherIcon(dayOrNight + forecast.current.weather[0]["main"]);
+  }, [localTime, dayOrNight, forecast.current.weather, forecast]);
 
   return (
     <Container>
@@ -42,15 +43,12 @@ export function LeftContainer() {
 
       <div id="location">
         <MdOutlineLocationOn size={20} />
-        {`${forecast.name}, ${forecast.sys?.country}`}
+        {`${city}`}
       </div>
 
-      <img src={Cloudy} alt="Cloudy" />
-      <p id="temperature">{Math.round(forecast.main.temp)}ºC</p>
-      <p id="weather-label">
-        {forecast.weather[0]["description"][0]?.toUpperCase() +
-          forecast.weather[0]["description"]?.substring(1)}
-      </p>
+      <img src={iconMapper[weatherIcon]} alt="Cloudy" />
+      <p id="temperature">{Math.round(forecast?.current?.temp)}ºC</p>
+      <p id="weather-label">{weatherLabel}</p>
     </Container>
   );
 }
