@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 8rem;
+  height: 15rem;
   background: var(--blue-900);
   border-radius: 1rem;
 
@@ -42,5 +42,6 @@ export const DailyForecastCard = styled.div`
   span {
     font-size: 1.25rem;
     font-weight: bold;
+    display: block;
   }
 `;
