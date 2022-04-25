@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-  width: 50%;
-  height: 475px;
+  width: 55%;
+  height: 100%;
   padding: 2rem;
 
   display: flex;
