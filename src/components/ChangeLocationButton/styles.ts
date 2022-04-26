@@ -6,6 +6,7 @@ export const ChangeLocationDiv = styled.div`
   align-items: center;
 
   input {
+    color: var(--blue-900);
     height: 2rem;
     width: 100%;
     border: none;
@@ -31,26 +32,5 @@ export const ChangeLocationDiv = styled.div`
       height: 2rem;
       width: 2rem;
     }
-  }
-`;
-
-export const Button = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  font-weight: 100;
-  width: 100%;
-  height: 2rem;
-  background: var(--gradient);
-  border: none;
-
-  border-radius: 2rem;
-  box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
-
-  transition: all 0.5s;
-
-  &:hover {
-    transform: scale(1.05);
   }
 `;

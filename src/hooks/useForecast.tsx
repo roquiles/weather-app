@@ -41,6 +41,7 @@ interface Forecast {
 interface ForecastContextData {
   forecast: Forecast;
   city: string;
+  changeCity: (city: string) => void;
 }
 
 interface ForecastProviderProps {
@@ -52,7 +53,7 @@ const ForecastContext = createContext<ForecastContextData>(
 );
 
 export function ForecastProvider(props: ForecastProviderProps) {
-  const [city, setCity] = useState("Porto Alegre");
+  const [city, setCity] = useState("");
   const [coordinates, setCoordinates] = useState({ lat: 0, lon: 0 });
   const [forecast, setForecast] = useState({
     timezone_offset: 0,
@@ -87,8 +88,12 @@ export function ForecastProvider(props: ForecastProviderProps) {
       .then((response) => setForecast(response.data));
   }, [city, coordinates.lat, coordinates.lon]);
 
+  function changeCity(city: string) {
+    setCity(city);
+  }
+
   return (
-    <ForecastContext.Provider value={{ forecast, city }}>
+    <ForecastContext.Provider value={{ forecast, city, changeCity }}>
       {props.children}
     </ForecastContext.Provider>
   );
