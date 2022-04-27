@@ -100,8 +100,8 @@ export function ForecastProvider(props: ForecastProviderProps) {
       .then((response) => setForecast(response.data));
   }, [city, coordinates.lat, coordinates.lon]);
 
-  async function changeCity(city: string) {
-    await api
+  function changeCity(city: string) {
+    api
       .get(
         `geo/1.0/direct?q=${city}&limit=1&appid=bd3fa3208449f766d94a794a8613f45c`
       )
