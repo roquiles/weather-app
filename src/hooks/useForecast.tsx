@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import { api } from "../services/api";
+import { formatString } from "../utils/helpers";
 
 interface DailyForecast {
   temp: {
@@ -53,7 +54,7 @@ const ForecastContext = createContext<ForecastContextData>(
 );
 
 export function ForecastProvider(props: ForecastProviderProps) {
-  const [city, setCity] = useState("São Paulo");
+  const [city, setCity] = useState("Porto Alegre");
   const [coordinates, setCoordinates] = useState({ lat: 0, lon: 0 });
   const [forecast, setForecast] = useState({
     timezone_offset: 0,
@@ -94,24 +95,28 @@ export function ForecastProvider(props: ForecastProviderProps) {
   useEffect(() => {
     api
       .get(
-        `geo/1.0/direct?q=${city}&limit=1&appid=bd3fa3208449f766d94a794a8613f45c`
-      )
-      .then((response) =>
-        setCoordinates({
-          lat: response.data[0].lat,
-          lon: response.data[0].lon,
-        })
-      )
-      .then(() =>
-        api.get(
-          `data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&exclude=minutely,hourly&appid=bd3fa3208449f766d94a794a8613f45c`
-        )
+        `data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&exclude=minutely,hourly&appid=bd3fa3208449f766d94a794a8613f45c`
       )
       .then((response) => setForecast(response.data));
   }, [city, coordinates.lat, coordinates.lon]);
 
-  function changeCity(city: string) {
-    setCity(city);
+  async function changeCity(city: string) {
+    await api
+      .get(
+        `geo/1.0/direct?q=${city}&limit=1&appid=bd3fa3208449f766d94a794a8613f45c`
+      )
+      .then((response) => {
+        if (response.data.length > 0) {
+          setCity(formatString(city));
+          setCoordinates({
+            lat: response.data[0].lat,
+            lon: response.data[0].lon,
+          });
+        } else {
+          throw new Error("Whoops! Invalid city name");
+        }
+      })
+      .catch(alert);
   }
 
   return (
