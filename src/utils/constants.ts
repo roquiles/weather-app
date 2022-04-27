@@ -6,7 +6,9 @@ import dayRain from "../assets/WeatherIcons/rain-day.svg";
 import nightRain from "../assets/WeatherIcons/rain-night.svg";
 import daySnowy from "../assets/WeatherIcons/snowy-day.svg";
 import nightSnowy from "../assets/WeatherIcons/snowy-night.svg";
-import rain from "../assets/WeatherIcons/rain.svg";
+import Rain from "../assets/WeatherIcons/rain.svg";
+import Clouds from "../assets/WeatherIcons/cloudy.svg";
+import Clear from "../assets/WeatherIcons/clear.svg";
 import { iconMapperType } from "../types";
 
 export const iconMapper: iconMapperType = {
@@ -18,7 +20,9 @@ export const iconMapper: iconMapperType = {
   nightRain,
   daySnowy,
   nightSnowy,
-  rain,
+  Rain,
+  Clouds,
+  Clear,
 };
 
 export const daysOfTheWeek = [
