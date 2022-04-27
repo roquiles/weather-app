@@ -10,6 +10,7 @@ export function ChangeLocationButton() {
   function handleChangeCity(e: React.KeyboardEvent) {
     if (e.code === "Enter") {
       changeCity(cityName);
+      setCityName("");
     }
   }
 
@@ -20,6 +21,7 @@ export function ChangeLocationButton() {
         placeholder="City name"
         onKeyUp={(e) => handleChangeCity(e)}
         onChange={(e) => setCityName(e.target.value)}
+        value={cityName}
       ></input>
       <button type="submit" onClick={() => changeCity(cityName)}>
         <FaAngleRight />
