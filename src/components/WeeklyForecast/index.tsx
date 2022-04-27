@@ -9,7 +9,7 @@ export function WeeklyForecast() {
       {forecast.daily.map((day, index) => {
         return index <= 3 ? (
           <DailyForecastCard key={index}>
-            <img src={iconMapper["day" + day.weather[0].main]} alt="Cloudy" />
+            <img src={iconMapper[day.weather[0].main]} alt="Cloudy" />
             <p>{`${daysOfTheWeek[new Date().getDay() + index].slice(0, 3)}`}</p>
             <p>
               Min.
