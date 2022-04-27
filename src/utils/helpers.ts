@@ -9,8 +9,3 @@ export function getLocalTime(date: Date, timezone: number) {
 export function toKmH(speed: number) {
   return (speed * 3.6).toFixed(2);
 }
-
-export function formatString(text: string) {
-  const lowerCaseText = text.toLowerCase();
-  return lowerCaseText[0].toUpperCase() + lowerCaseText.substring(1);
-}

@@ -6,7 +6,6 @@ import {
   useState,
 } from "react";
 import { api } from "../services/api";
-import { formatString } from "../utils/helpers";
 
 interface DailyForecast {
   temp: {
@@ -41,7 +40,10 @@ interface Forecast {
 
 interface ForecastContextData {
   forecast: Forecast;
-  city: string;
+  location: {
+    city: string;
+    country: string;
+  };
   changeCity: (city: string) => void;
 }
 
@@ -54,7 +56,10 @@ const ForecastContext = createContext<ForecastContextData>(
 );
 
 export function ForecastProvider(props: ForecastProviderProps) {
-  const [city, setCity] = useState("Porto Alegre");
+  const [location, setLocation] = useState({
+    city: "Porto Alegre",
+    country: "BR",
+  });
   const [coordinates, setCoordinates] = useState({ lat: 0, lon: 0 });
   const [forecast, setForecast] = useState({
     timezone_offset: 0,
@@ -86,7 +91,10 @@ export function ForecastProvider(props: ForecastProviderProps) {
               `geo/1.0/reverse?lat=${response.data.lat}&lon=${response.data.lon}&limit=1&appid=bd3fa3208449f766d94a794a8613f45c`
             )
             .then((response) => {
-              setCity(response.data[0].name);
+              setLocation({
+                city: response.data[0].name,
+                country: response.data[0].country,
+              });
             });
         });
     });
@@ -97,8 +105,10 @@ export function ForecastProvider(props: ForecastProviderProps) {
       .get(
         `data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&exclude=minutely,hourly&appid=bd3fa3208449f766d94a794a8613f45c`
       )
-      .then((response) => setForecast(response.data));
-  }, [city, coordinates.lat, coordinates.lon]);
+      .then((response) => {
+        setForecast(response.data);
+      });
+  }, [location, coordinates.lat, coordinates.lon]);
 
   function changeCity(city: string) {
     api
@@ -107,7 +117,10 @@ export function ForecastProvider(props: ForecastProviderProps) {
       )
       .then((response) => {
         if (response.data.length > 0) {
-          setCity(formatString(city));
+          setLocation({
+            city: response.data[0].name,
+            country: response.data[0].country,
+          });
           setCoordinates({
             lat: response.data[0].lat,
             lon: response.data[0].lon,
@@ -120,7 +133,7 @@ export function ForecastProvider(props: ForecastProviderProps) {
   }
 
   return (
-    <ForecastContext.Provider value={{ forecast, city, changeCity }}>
+    <ForecastContext.Provider value={{ forecast, location, changeCity }}>
       {props.children}
     </ForecastContext.Provider>
   );

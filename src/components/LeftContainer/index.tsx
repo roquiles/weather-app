@@ -14,7 +14,7 @@ export function LeftContainer() {
   const [dayOrNight, setDayOrNight] = useState("");
   const [weatherIcon, setWeatherIcon] = useState("");
 
-  const { forecast, city } = useForecast();
+  const { forecast, location } = useForecast();
   const weatherLabel =
     forecast.current.weather[0]["description"][0]?.toUpperCase() +
     forecast.current.weather[0]["description"]?.substring(1);
@@ -23,7 +23,7 @@ export function LeftContainer() {
   const date = new Date();
   const localTime = getLocalTime(date, forecast.timezone_offset);
 
-  // Determining ir it's day or night
+  // Determining if it's day or night
   useEffect(() => {
     if (localTime >= 6 && localTime <= 17) {
       setDayOrNight("day");
@@ -43,7 +43,7 @@ export function LeftContainer() {
 
       <div id="location">
         <MdOutlineLocationOn size={20} />
-        {`${city}`}
+        {`${location.city}, ${location.country}`}
       </div>
 
       <img src={iconMapper[weatherIcon]} alt="Cloudy" />
