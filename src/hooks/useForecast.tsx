@@ -53,7 +53,7 @@ const ForecastContext = createContext<ForecastContextData>(
 );
 
 export function ForecastProvider(props: ForecastProviderProps) {
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("São Paulo");
   const [coordinates, setCoordinates] = useState({ lat: 0, lon: 0 });
   const [forecast, setForecast] = useState({
     timezone_offset: 0,
@@ -73,16 +73,38 @@ export function ForecastProvider(props: ForecastProviderProps) {
   } as Forecast);
 
   useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      api
+        .get(
+          `data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&exclude=minutely,hourly&appid=bd3fa3208449f766d94a794a8613f45c`
+        )
+        .then((response) => {
+          setForecast(response.data);
+          api
+            .get(
+              `geo/1.0/reverse?lat=${response.data.lat}&lon=${response.data.lon}&limit=1&appid=bd3fa3208449f766d94a794a8613f45c`
+            )
+            .then((response) => {
+              setCity(response.data[0].name);
+            });
+        });
+    });
+  }, []);
+
+  useEffect(() => {
     api
       .get(
-        `geo/1.0/direct?q=${city}&limit=1&appid=617bb0595bc02215630137ff7349e023`
+        `geo/1.0/direct?q=${city}&limit=1&appid=bd3fa3208449f766d94a794a8613f45c`
       )
       .then((response) =>
-        setCoordinates({ lat: response.data[0].lat, lon: response.data[0].lon })
+        setCoordinates({
+          lat: response.data[0].lat,
+          lon: response.data[0].lon,
+        })
       )
       .then(() =>
         api.get(
-          `data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&exclude=minutely,hourly&appid=617bb0595bc02215630137ff7349e023`
+          `data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&exclude=minutely,hourly&appid=bd3fa3208449f766d94a794a8613f45c`
         )
       )
       .then((response) => setForecast(response.data));
