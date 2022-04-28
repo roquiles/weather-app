@@ -38,6 +38,11 @@ interface Forecast {
   daily: DailyForecast[];
 }
 
+interface CoordinatesType {
+  lat: number;
+  lon: number;
+}
+
 interface ForecastContextData {
   forecast: Forecast;
   location: {
@@ -60,7 +65,7 @@ export function ForecastProvider(props: ForecastProviderProps) {
     city: "Porto Alegre",
     country: "BR",
   });
-  const [coordinates, setCoordinates] = useState({ lat: 0, lon: 0 });
+  const [coordinates, setCoordinates] = useState({} as CoordinatesType);
   const [forecast, setForecast] = useState({
     timezone_offset: 0,
     current: {
@@ -111,6 +116,11 @@ export function ForecastProvider(props: ForecastProviderProps) {
   }, [location, coordinates.lat, coordinates.lon]);
 
   function changeCity(city: string) {
+    if (city === "") {
+      alert("Whoops! Invalid city name");
+      return;
+    }
+
     api
       .get(
         `geo/1.0/direct?q=${city}&limit=1&appid=bd3fa3208449f766d94a794a8613f45c`
