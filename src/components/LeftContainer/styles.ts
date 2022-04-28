@@ -45,4 +45,30 @@ export const Container = styled.section`
     font-weight: 100;
     font-size: 1.5rem;
   }
+
+  @media only screen and (max-width: 800px) {
+    width: 97vw;
+    height: 300px;
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+    img {
+      position: absolute;
+      bottom: 0;
+      right: 2rem;
+    }
+
+    #temperature {
+      position: absolute;
+      top: 4rem;
+      font-size: 3rem;
+    }
+
+    #location {
+      margin: 1rem 0 6rem;
+    }
+  }
 `;

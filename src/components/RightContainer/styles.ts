@@ -8,6 +8,7 @@ export const Container = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 2rem;
 
   table {
     width: 100%;
@@ -25,5 +26,10 @@ export const Container = styled.section`
       text-align: right;
       font-weight: 100;
     }
+  }
+
+  @media only screen and (max-width: 800px) {
+    width: 100%;
+    gap: 1.5rem;
   }
 `;
