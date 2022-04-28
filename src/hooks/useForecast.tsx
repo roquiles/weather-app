@@ -38,11 +38,6 @@ interface Forecast {
   daily: DailyForecast[];
 }
 
-interface CoordinatesType {
-  lat: number;
-  lon: number;
-}
-
 interface ForecastContextData {
   forecast: Forecast;
   location: {
@@ -62,10 +57,14 @@ const ForecastContext = createContext<ForecastContextData>(
 
 export function ForecastProvider(props: ForecastProviderProps) {
   const [location, setLocation] = useState({
-    city: "Porto Alegre",
-    country: "BR",
+    city: "Null Island",
+    country: "",
   });
-  const [coordinates, setCoordinates] = useState({} as CoordinatesType);
+  const [coordinates, setCoordinates] = useState({
+    lat: 0,
+    lon: 0,
+  });
+
   const [forecast, setForecast] = useState({
     timezone_offset: 0,
     current: {
@@ -90,6 +89,7 @@ export function ForecastProvider(props: ForecastProviderProps) {
           `data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&exclude=minutely,hourly&appid=bd3fa3208449f766d94a794a8613f45c`
         )
         .then((response) => {
+          console.log(response);
           setForecast(response.data);
           api
             .get(
