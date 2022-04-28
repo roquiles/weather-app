@@ -2,6 +2,8 @@
 
 Got the idea from [here](https://github.com/florinpop17/app-ideas/blob/master/Projects/1-Beginner/Weather-App.md)
 
+Application running [here](https://weather-for-today.netlify.app/)
+
 A weather application to get the temperature, weather condition and whether it is day or night of a particular city using `accuweather`.
 
 ## User Stories
@@ -11,5 +13,5 @@ A weather application to get the temperature, weather condition and whether it i
 
 ## Bonus features
 
-- [ ] By closing the browser window the city name will be stored in localStorage and when the user returns, the name will be retrieved to make an api call to update the `DOM`.
+- [ ] User can see the weather by it's position.
 - [ ] User can see the weather forecast for the next four days.
