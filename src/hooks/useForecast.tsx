@@ -45,6 +45,7 @@ interface ForecastContextData {
     country: string;
   };
   changeCity: (city: string) => void;
+  isLoading: boolean;
 }
 
 interface ForecastProviderProps {
@@ -56,6 +57,7 @@ const ForecastContext = createContext<ForecastContextData>(
 );
 
 export function ForecastProvider(props: ForecastProviderProps) {
+  const [isLoading, setIsLoading] = useState(true);
   const [location, setLocation] = useState({
     city: "Porto Alegre",
     country: "RS",
@@ -116,6 +118,7 @@ export function ForecastProvider(props: ForecastProviderProps) {
       )
       .then((response) => {
         setForecast(response.data);
+        setIsLoading(false);
       });
   }, [location, coordinates.lat, coordinates.lon]);
 
@@ -147,7 +150,9 @@ export function ForecastProvider(props: ForecastProviderProps) {
   }
 
   return (
-    <ForecastContext.Provider value={{ forecast, location, changeCity }}>
+    <ForecastContext.Provider
+      value={{ forecast, location, changeCity, isLoading }}
+    >
       {props.children}
     </ForecastContext.Provider>
   );
