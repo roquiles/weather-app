@@ -17,7 +17,7 @@ export const Container = styled.section`
     width: 150px;
   }
 
-  transition: all 0.5s;
+  transition: transform 0.5s;
 
   &:hover {
     transform: scale(1.02);

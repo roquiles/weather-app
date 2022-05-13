@@ -2,7 +2,7 @@ import { useForecast } from "../../hooks/useForecast";
 import { Container } from "./styles";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { useEffect, useState } from "react";
-
+import loadingSpinner from "../../assets/spinner.svg";
 import { getLocalTime } from "../../utils/helpers";
 import {
   daysOfTheWeek,
@@ -14,7 +14,7 @@ export function LeftContainer() {
   const [dayOrNight, setDayOrNight] = useState("");
   const [weatherIcon, setWeatherIcon] = useState("");
 
-  const { forecast, location } = useForecast();
+  const { forecast, location, isLoading } = useForecast();
   const weatherLabel =
     forecast.current.weather[0]["description"][0]?.toUpperCase() +
     forecast.current.weather[0]["description"]?.substring(1);
@@ -41,14 +41,20 @@ export function LeftContainer() {
         monthsOfTheYear[date.getMonth()]
       } ${date.getFullYear()}`}</p>
 
-      <div id="location">
-        <MdOutlineLocationOn size={20} />
-        {`${location.city}, ${location.country}`}
-      </div>
+      {isLoading ? (
+        <img src={loadingSpinner} alt="loading" />
+      ) : (
+        <>
+          <div id="location">
+            <MdOutlineLocationOn size={20} />
+            {`${location.city}, ${location.country}`}
+          </div>
 
-      <img src={iconMapper[weatherIcon]} alt="Cloudy" />
-      <p id="temperature">{Math.round(forecast?.current?.temp)}ºC</p>
-      <p id="weather-label">{weatherLabel}</p>
+          <img src={iconMapper[weatherIcon]} alt="Cloudy" />
+          <p id="temperature">{Math.round(forecast?.current?.temp)}ºC</p>
+          <p id="weather-label">{weatherLabel}</p>
+        </>
+      )}
     </Container>
   );
 }

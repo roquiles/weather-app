@@ -21,7 +21,7 @@ export function RightContainer() {
           </tr>
           <tr>
             <th>PRECIPITATION</th>
-            <td>{forecast.daily[0]?.pop * 100}%</td>
+            <td>{Math.round(forecast.daily[0]?.pop * 100)}%</td>
           </tr>
           <tr>
             <th>WIND</th>
