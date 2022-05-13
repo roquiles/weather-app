@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.section`
   width: 45%;
   padding: 2rem;
-  height: 100%;
+  min-height: 550px;
   background: linear-gradient(#8d80ad, #4d7298);
   border-radius: 2rem;
   box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
