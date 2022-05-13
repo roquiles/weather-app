@@ -57,12 +57,12 @@ const ForecastContext = createContext<ForecastContextData>(
 
 export function ForecastProvider(props: ForecastProviderProps) {
   const [location, setLocation] = useState({
-    city: "Null Island",
-    country: "",
+    city: "Porto Alegre",
+    country: "RS",
   });
   const [coordinates, setCoordinates] = useState({
-    lat: 0,
-    lon: 0,
+    lat: -30.0253, //Porto Alegre's latitude
+    lon: -51.1367, //Porto Alegre's longitude
   });
 
   const [forecast, setForecast] = useState({
@@ -89,7 +89,6 @@ export function ForecastProvider(props: ForecastProviderProps) {
           `data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&exclude=minutely,hourly&appid=bd3fa3208449f766d94a794a8613f45c`
         )
         .then((response) => {
-          console.log(response);
           setForecast(response.data);
           api
             .get(
@@ -99,6 +98,11 @@ export function ForecastProvider(props: ForecastProviderProps) {
               setLocation({
                 city: response.data[0].name,
                 country: response.data[0].country,
+              });
+
+              setCoordinates({
+                lat: response.data.lat,
+                lon: response.data.lon,
               });
             });
         });
